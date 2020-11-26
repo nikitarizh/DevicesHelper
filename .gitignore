@@ -1,0 +1,12 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+
+.settings/
+.vscode/
+
+target/
+
+.project
+.classpath
+db.db
