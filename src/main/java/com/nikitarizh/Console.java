@@ -4,7 +4,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;   
 
 public class Console {
