@@ -71,7 +71,6 @@ public class MainSceneController {
 
         try {
             console.logWarning("Trying to write data to table...");
-            model.writeTestData();
             console.logSuccess("Data has been written");
         }
         catch (Exception SQLException) {
@@ -88,7 +87,7 @@ public class MainSceneController {
     public void addButtonClicked() {
         try {
             console.logWarning("Trying to add blank value...");
-            model.addData("type", "location", "toFixes");
+            model.addData("type", "location", "OK");
             loadData();
             console.logSuccess("Blank value has been added");
         }

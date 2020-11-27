@@ -1,5 +1,3 @@
-// copy-pasted code
-
 package com.nikitarizh;
 
 import java.sql.*;
@@ -14,17 +12,12 @@ public class Model {
         Class.forName("org.sqlite.JDBC");
         conn = DriverManager.getConnection("jdbc:sqlite:db.db");
         statmt = conn.createStatement();
+        createTable();
 	}
 	
 	public void createTable() throws ClassNotFoundException, SQLException {
         statmt.execute("CREATE TABLE if not exists 'devices' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' TEXT NOT NULL, 'location' TEXT NOT NULL, 'toFixes' TEXT);");
     }
-	
-	public void writeTestData() throws SQLException {
-		   statmt.execute("INSERT INTO 'devices' ('type', 'location') VALUES ('Phone', '314'); ");
-		   statmt.execute("INSERT INTO 'devices' ('type', 'location') VALUES ('PC', '315'); ");
-		   statmt.execute("INSERT INTO 'devices' ('type', 'location') VALUES ('Laptop', 'hall'); ");
-	}
 	
 	public ResultSet readData() throws ClassNotFoundException, SQLException {
 		resSet = statmt.executeQuery("SELECT * FROM devices");
