@@ -7,7 +7,7 @@ import javafx.scene.text.TextFlow;
 public class Console {
 
     private TextFlow console;
-    private int maxLength = 10;
+    private int maxLength = 21;
 
     private String COLOR_GREEN = "#44cc00";
     private String COLOR_WARNING = "#ffc400";
