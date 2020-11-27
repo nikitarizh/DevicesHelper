@@ -16,7 +16,7 @@
    <children>
       <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1">
+          <Tab text="Main">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -30,15 +30,18 @@
                               <TextFlow fx:id="consoleField" layoutX="2.0" layoutY="27.0" prefHeight="334.0" prefWidth="159.0" style="-fx-background-color: #fff; -fx-border-width: 1px; -fx-border-color: #7f7f7f; -fx-border-radius: 2px;" />
                            </children>
                         </Pane>
-                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#buttonClicked" text="Button" />
+                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#buttonClicked" text="Write test data" />
                         <TableView fx:id="devicesTable" layoutX="14.0" layoutY="48.0" prefHeight="309.0" prefWidth="409.0">
                            <columns>
-                              <TableColumn fx:id="typeColumn" minWidth="80.0" prefWidth="132.0" text="Type" />
-                              <TableColumn fx:id="locationColumn" minWidth="80.0" prefWidth="147.0" text="Location" />
-                              <TableColumn fx:id="statusColumn" minWidth="80.0" prefWidth="128.0" text="Status" />
+                              <TableColumn fx:id="typeColumn" minWidth="-1.0" prefWidth="-1.0" text="Type" />
+                              <TableColumn fx:id="locationColumn" minWidth="-1.0" prefWidth="-1.0" text="Location" />
+                              <TableColumn fx:id="statusColumn" minWidth="-1.0" prefWidth="136.0" text="Status" />
                            </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
-                        <Button layoutX="89.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadDataButtonClicked" text="Load data" />
+                        <Button layoutX="133.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadData" text="Load data" />
                      </children>
                   </AnchorPane>
             </content>
