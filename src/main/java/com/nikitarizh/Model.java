@@ -31,9 +31,21 @@ public class Model {
 		
 		return resSet;
     }
+
+    public void addData(String type, String location, String toFixes) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO 'devices' ('type', 'location', 'toFixes') VALUES (?, ?, ?);");
+        stmt.setString(1, type);
+        stmt.setString(2, location);
+        stmt.setString(3, toFixes);
+        stmt.execute();
+    }
     
     public void updateData(int id, String column, String newValue) throws SQLException {
         statmt.execute("UPDATE 'devices' SET " + column + " = '" + newValue + "' WHERE id = " + id);
+    }
+
+    public void removeData(int id) throws SQLException {
+        statmt.execute("DELETE FROM 'devices' WHERE id = " + id);
     }
 	
     public void CloseDB() throws ClassNotFoundException, SQLException {

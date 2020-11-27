@@ -1,12 +1,16 @@
 package com.nikitarizh;
 
 import java.sql.*;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.TextFlow;
@@ -54,7 +58,7 @@ public class MainSceneController {
         loadData();
     }
 
-    public void buttonClicked() {
+    public void writeTestDataButtonClicked() {
         try {
             console.logWarning("Trying to create table...");
             model.createTable();
@@ -79,6 +83,41 @@ public class MainSceneController {
 
     public void loadDataButtonClicked() {
         loadData();
+    }
+
+    public void addButtonClicked() {
+        try {
+            console.logWarning("Trying to add blank value...");
+            model.addData("type", "location", "toFixes");
+            loadData();
+            console.logSuccess("Blank value has been added");
+        }
+        catch (Exception e) {
+            console.logError("Error adding blank value");
+            console.logError(e.getMessage());
+        }
+    }
+
+    public void removeButtonClicked() {
+        Device d = devicesTable.getSelectionModel().getSelectedItem();
+        
+        Alert confirmation = new Alert(AlertType.CONFIRMATION);
+        confirmation.setTitle("Delete record");
+        confirmation.setHeaderText("Are you sure want to remove this record?");
+        
+        Optional<ButtonType> option = confirmation.showAndWait();
+        if (option.get() == ButtonType.OK) {
+            try {
+                console.logWarning("Trying to remove record...");
+                model.removeData(d.getId());
+                loadData();
+                console.logSuccess("Successfully removed record");
+            }
+            catch (SQLException e) {
+                console.logError("Error removing record");
+                console.logError(e.getMessage());
+            }
+        } 
     }
 
     public void typeColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {

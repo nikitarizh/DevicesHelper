@@ -20,8 +20,8 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#buttonClicked" text="Write test data" />
-                        <TableView fx:id="devicesTable" layoutX="14.0" layoutY="52.0" prefHeight="309.0" prefWidth="573.0">
+                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#writeTestDataButtonClicked" text="Write test data" />
+                        <TableView fx:id="devicesTable" layoutX="14.0" layoutY="52.0" prefHeight="306.0" prefWidth="573.0">
                            <columns>
                               <TableColumn fx:id="typeColumn" minWidth="-1.0" onEditCommit="#typeColumnChanged" prefWidth="-1.0" text="Type" />
                               <TableColumn fx:id="locationColumn" minWidth="-1.0" onEditCommit="#locationColumnChanged" prefWidth="-1.0" text="Location" />
@@ -32,6 +32,8 @@
                            </columnResizePolicy>
                         </TableView>
                         <Button layoutX="133.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadData" text="Load data" />
+                        <Button layoutX="231.0" layoutY="14.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
+                        <Button layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onAction="#removeButtonClicked" text="Remove" />
                      </children>
                   </AnchorPane>
             </content>

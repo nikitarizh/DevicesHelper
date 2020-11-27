@@ -8,6 +8,13 @@ public class Device {
     private SimpleStringProperty location;
     private SimpleStringProperty toFixes;
 
+    public Device(String type, String location, String toFixes) {
+        this.id = null;
+        this.type = new SimpleStringProperty(type);
+        this.location = new SimpleStringProperty(location);
+        this.toFixes = new SimpleStringProperty(toFixes);
+    }
+
     public Device(int id, String type, String location, String toFixes) {
         this.id = new SimpleIntegerProperty(id);
         this.type = new SimpleStringProperty(type);
