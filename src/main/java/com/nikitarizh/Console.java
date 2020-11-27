@@ -1,6 +1,5 @@
 package com.nikitarizh;
 
-import javafx.collections.ObservableList;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
