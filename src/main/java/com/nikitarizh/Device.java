@@ -31,7 +31,7 @@ public class Device {
         return type.get();
     }
 
-    public void setId(String type) {
+    public void setType(String type) {
         this.type.set(type);
     }
 

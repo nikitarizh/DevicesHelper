@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.TextFlow;
 
 public class MainSceneController {
@@ -44,12 +45,19 @@ public class MainSceneController {
         catch (ClassNotFoundException e) {
             console.logError("Connecting DB failed (Class exception)");
         }
+
+        devicesTable.setEditable(true);
+        typeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        locationColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        statusColumn.setCellFactory(TextAreaTableCell.forTableColumn());
+
+        loadData();
     }
 
     public void buttonClicked() {
         try {
             console.logWarning("Trying to create table...");
-            model.CreateDB();
+            model.createTable();
             console.logSuccess("Table has been created");
         }
         catch (Exception SQLException) {
@@ -59,7 +67,7 @@ public class MainSceneController {
 
         try {
             console.logWarning("Trying to write data to table...");
-            model.WriteDB();
+            model.writeTestData();
             console.logSuccess("Data has been written");
         }
         catch (Exception SQLException) {
@@ -73,11 +81,50 @@ public class MainSceneController {
         loadData();
     }
 
+    public void typeColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
+        Device d = devicesTable.getSelectionModel().getSelectedItem();
+        d.setType(editEvent.getNewValue());
+        try {
+            console.logWarning("Trying to update table...");
+            model.updateData(d.getId(), "type", d.getType());
+            console.logSuccess("Table updated");
+        }
+        catch (SQLException e) {
+            console.logError("Error updating table");
+        }
+    }
+
+    public void locationColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
+        Device d = devicesTable.getSelectionModel().getSelectedItem();
+        d.setLocation(editEvent.getNewValue());
+        try {
+            console.logWarning("Trying to update table...");
+            model.updateData(d.getId(), "location", d.getLocation());
+            console.logSuccess("Table updated");
+        }
+        catch (SQLException e) {
+            console.logError("Error updating table");
+        }
+    }
+
+    public void statusColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
+        Device d = devicesTable.getSelectionModel().getSelectedItem();
+        d.setToFixes(editEvent.getNewValue());
+        try {
+            console.logWarning("Trying to update table...");
+            model.updateData(d.getId(), "toFixes", d.getToFixes());
+            console.logSuccess("Table updated");
+        }
+        catch (SQLException e) {
+            console.logError("Error updating table");
+        }
+    }
+
     public void loadData() {
         ResultSet res = null;
         try {
             console.logWarning("Trying to read DB...");
-            res = model.ReadDB();
+            res = model.readData();
             console.logSuccess("Data read");
         }
         catch (Exception e) {

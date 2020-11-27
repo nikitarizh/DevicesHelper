@@ -9,7 +9,6 @@ public class Model {
 	public static Statement statmt;
 	public static ResultSet resSet;
 	
-	// --------Connection to DB--------
 	public Model() throws ClassNotFoundException, SQLException  {
         conn = null;
         Class.forName("org.sqlite.JDBC");
@@ -17,26 +16,26 @@ public class Model {
         statmt = conn.createStatement();
 	}
 	
-	// --------Table creation--------
-	public void CreateDB() throws ClassNotFoundException, SQLException {
+	public void createTable() throws ClassNotFoundException, SQLException {
         statmt.execute("CREATE TABLE if not exists 'devices' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' TEXT NOT NULL, 'location' TEXT NOT NULL, 'toFixes' TEXT);");
     }
 	
-	// --------Table filling--------
-	public void WriteDB() throws SQLException {
+	public void writeTestData() throws SQLException {
 		   statmt.execute("INSERT INTO 'devices' ('type', 'location') VALUES ('Phone', '314'); ");
 		   statmt.execute("INSERT INTO 'devices' ('type', 'location') VALUES ('PC', '315'); ");
 		   statmt.execute("INSERT INTO 'devices' ('type', 'location') VALUES ('Laptop', 'hall'); ");
 	}
 	
-	// --------Table output--------
-	public ResultSet ReadDB() throws ClassNotFoundException, SQLException {
+	public ResultSet readData() throws ClassNotFoundException, SQLException {
 		resSet = statmt.executeQuery("SELECT * FROM devices");
 		
 		return resSet;
-	}
+    }
+    
+    public void updateData(int id, String column, String newValue) throws SQLException {
+        statmt.execute("UPDATE 'devices' SET " + column + " = '" + newValue + "' WHERE id = " + id);
+    }
 	
-    // --------Closing--------
     public void CloseDB() throws ClassNotFoundException, SQLException {
         conn.close();
         statmt.close();
