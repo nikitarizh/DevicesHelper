@@ -2,7 +2,7 @@
 ## What is it?
 A tool to store data about devices in your organization
 ## What does it do?
-- It sotres data about devices in your organization (obviously)
+- It stores data about devices in your organization (obviously)
 ## What is it built with?
 Java
 ## Why Java?
