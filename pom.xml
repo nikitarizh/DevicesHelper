@@ -54,41 +54,25 @@
                 </configuration>
             </plugin>
 
-            <!-- PACKAGE ALL DEPENDENCIES INTO /lib AND MAKE JAR EXECUTABLE -->
+            <!-- PACKAGE ALL DEPENDENCIES INTO JAR AND MAKE JAR EXECUTABLE -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.1</version>
+                <groupId>com.jolira</groupId>
+                <artifactId>onejar-maven-plugin</artifactId>
+                <version>1.4.4</version>
                 <executions>
-                  <execution>
-                    <id>copy-dependencies</id>
-                    <phase>package</phase>
-                    <goals>
-                      <goal>copy-dependencies</goal>
-                    </goals>
-                    <configuration>
-                      <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                      <overWriteReleases>false</overWriteReleases>
-                      <overWriteSnapshots>false</overWriteSnapshots>
-                      <overWriteIfNewer>true</overWriteIfNewer>
-                    </configuration>
-                  </execution>
+                    <execution>
+                        <configuration>
+                            <mainClass>${main.class}</mainClass>
+                            <attachToBuild>true</attachToBuild>
+                            <filename>devicesHelper-onejar.jar</filename>
+                        </configuration>
+                        <goals>
+                            <goal>one-jar</goal>
+                        </goals>
+                    </execution>
                 </executions>
-              </plugin>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                  <archive>
-                    <manifest>
-                      <addClasspath>true</addClasspath>
-                      <classpathPrefix>lib/</classpathPrefix>
-                      <mainClass>${main.class}</mainClass>
-                    </manifest>
-                  </archive>
-                </configuration>
-              </plugin>
+            </plugin>
+
         </plugins>
     </build>
 </project>
