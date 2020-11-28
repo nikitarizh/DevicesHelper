@@ -218,10 +218,10 @@ public class MainSceneController {
             confirmation.setHeaderText("Search parameters will be reset. Continue?");
             Optional<ButtonType> option = confirmation.showAndWait();
             if (option.get() != ButtonType.OK) {
-                searchTextField.clear();
                 return false;
             }
         }
+        searchTextField.clear();
         return true;
     }
 }
