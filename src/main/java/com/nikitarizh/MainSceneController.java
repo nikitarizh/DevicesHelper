@@ -3,6 +3,7 @@ package com.nikitarizh;
 import java.sql.*;
 import java.util.Optional;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -28,6 +30,8 @@ public class MainSceneController {
     private TableColumn<Device, String> locationColumn;
     @FXML
     private TableColumn<Device, String> statusColumn;
+    @FXML
+    private TextField searchTextField;
     
     private Console console;
     private Model model;
@@ -55,40 +59,26 @@ public class MainSceneController {
         locationColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         statusColumn.setCellFactory(TextAreaTableCell.forTableColumn());
 
-        loadData();
-    }
-
-    public void writeTestDataButtonClicked() {
-        try {
-            console.logWarning("Trying to create table...");
-            model.createTable();
-            console.logSuccess("Table has been created");
-        }
-        catch (Exception SQLException) {
-            console.logError("Error creating table");
-            return;
-        }
-
-        try {
-            console.logWarning("Trying to write data to table...");
-            console.logSuccess("Data has been written");
-        }
-        catch (Exception SQLException) {
-            console.logError("Error writing data to table");
-            return;
-        }
-        loadData();
+        loadData(null);
     }
 
     public void loadDataButtonClicked() {
-        loadData();
+        if (!cleanSearchConfirmation()) {
+            return;
+        }
+
+        loadData(null);
     }
 
     public void addButtonClicked() {
+        if (!cleanSearchConfirmation()) {
+            return;
+        }
+
         try {
             console.logWarning("Trying to add blank value...");
             model.addData("type", "location", "OK");
-            loadData();
+            loadData(null);
             console.logSuccess("Blank value has been added");
         }
         catch (Exception e) {
@@ -106,10 +96,14 @@ public class MainSceneController {
         
         Optional<ButtonType> option = confirmation.showAndWait();
         if (option.get() == ButtonType.OK) {
+            if (!cleanSearchConfirmation()) {
+                return;
+            }
+
             try {
                 console.logWarning("Trying to remove record...");
                 model.removeData(d.getId());
-                loadData();
+                loadData(null);
                 console.logSuccess("Successfully removed record");
             }
             catch (SQLException e) {
@@ -158,7 +152,11 @@ public class MainSceneController {
         }
     }
 
-    public void loadData() {
+    public void searchInputKeyPressed(ObservableValue<String> observable, String oldValue, String newValue) {
+        loadData(newValue);
+    }
+
+    public void loadData(String search) {
         ResultSet res = null;
         try {
             console.logWarning("Trying to read DB...");
@@ -182,7 +180,26 @@ public class MainSceneController {
                     fixes = "OK";
                 }
 
-                data.add(new Device(id, type, location, fixes));
+                if (search != null && !search.isEmpty()) {
+                    search = search.trim().toLowerCase();
+                    String fullData = type + " " + location + " " + fixes;
+                    fullData = fullData.toLowerCase();
+                    String[] splittedSearch = search.split(" ");
+                    boolean ok = true;
+                    for (int i = 0; i < splittedSearch.length; i++) {
+                        if (!fullData.contains(splittedSearch[i])) {
+                            ok = false;
+                        }
+                    }
+                    
+                    if (ok) {
+                        data.add(new Device(id, type, location, fixes));
+                    }
+                }
+                else {
+                    data.add(new Device(id, type, location, fixes));
+                }
+                
             }
             devicesTable.setItems(data);
             console.logSuccess("ResultSet read");
@@ -191,5 +208,20 @@ public class MainSceneController {
             console.logError("Error reading ReultSet");
             return;
         }
+    }
+
+    public boolean cleanSearchConfirmation() {
+        String search = searchTextField.textProperty().get();
+        if (search != null && !search.isEmpty()) {
+            Alert confirmation = new Alert(AlertType.CONFIRMATION);
+            confirmation.setTitle("Are you sure?");
+            confirmation.setHeaderText("Search parameters will be reset. Continue?");
+            Optional<ButtonType> option = confirmation.showAndWait();
+            if (option.get() != ButtonType.OK) {
+                searchTextField.clear();
+                return false;
+            }
+        }
+        return true;
     }
 }

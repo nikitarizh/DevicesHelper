@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -30,9 +31,10 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Button layoutX="78.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadData" text="Load data" />
+                        <Button layoutX="78.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadDataButtonClicked" text="Load data" />
                         <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
                         <Button layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onAction="#removeButtonClicked" text="Remove" />
+                        <TextField fx:id="searchTextField" layoutX="177.0" layoutY="14.0" onTextChange="#searchInputKeyPressed" promptText="Search" />
                      </children>
                   </AnchorPane>
             </content>
