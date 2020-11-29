@@ -1,8 +1,13 @@
-package com.nikitarizh;
+package com.nikitarizh.view;
+
+import java.util.Optional;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
@@ -18,6 +23,7 @@ public class GUI extends Application {
         }
         catch (Exception e) {
             System.out.println("Error loading template");
+            e.printStackTrace();
             System.exit(1);
         }
     
@@ -27,5 +33,16 @@ public class GUI extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+    }
+
+    public static boolean showConfirmation(String title, String text) {
+        Alert confirmation = new Alert(AlertType.CONFIRMATION);
+        confirmation.setTitle(title);
+        confirmation.setHeaderText(text);
+        Optional<ButtonType> option = confirmation.showAndWait();
+        if (option.get() != ButtonType.OK) {
+            return false;
+        }
+        return true;
     }
 }

@@ -1,6 +1,6 @@
 // ORIGINAL: https://gist.github.com/eckig/30abf0d7d51b7756c2e7
 
-package com.nikitarizh;
+package com.nikitarizh.util;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;

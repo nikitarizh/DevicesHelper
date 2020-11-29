@@ -1,4 +1,4 @@
-package com.nikitarizh;
+package com.nikitarizh.entities;
 
 import javafx.beans.property.*;
 

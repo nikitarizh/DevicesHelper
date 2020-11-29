@@ -9,7 +9,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <main.class>com.nikitarizh.App</main.class>
-        <javafx.main.class>com.nikitarizh.GUI</javafx.main.class>
+        <javafx.main.class>com.nikitarizh.view.GUI</javafx.main.class>
         <exec.mainClass>${main.class}</exec.mainClass>
     </properties>
     <dependencies>

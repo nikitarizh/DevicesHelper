@@ -1,4 +1,4 @@
-package com.nikitarizh;
+package com.nikitarizh.util;
 
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;

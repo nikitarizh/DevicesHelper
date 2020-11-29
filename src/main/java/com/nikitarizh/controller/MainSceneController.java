@@ -1,18 +1,17 @@
-package com.nikitarizh;
+package com.nikitarizh.controller;
+
+import com.nikitarizh.entities.*;
+import com.nikitarizh.model.*;
+import com.nikitarizh.util.*;
+import com.nikitarizh.view.GUI;
 
 import java.sql.*;
-import java.util.Optional;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.TextFlow;
@@ -34,14 +33,14 @@ public class MainSceneController {
     private TextField searchTextField;
     
     private Console console;
-    private Model model;
+    private DevicesModel devicesModel;
 
     public void initialize() {
         console = new Console(consoleField);
 
         try {
             console.logWarning("Connecting DB...");
-            model = new Model();
+            devicesModel = new DevicesModel();
             typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
             locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
             statusColumn.setCellValueFactory(new PropertyValueFactory<>("toFixes"));
@@ -77,7 +76,7 @@ public class MainSceneController {
 
         try {
             console.logWarning("Trying to add blank value...");
-            model.addData("type", "location", "OK");
+            devicesModel.addData("type", "location", "OK");
             loadData(null);
             console.logSuccess("Blank value has been added");
         }
@@ -90,19 +89,14 @@ public class MainSceneController {
     public void removeButtonClicked() {
         Device d = devicesTable.getSelectionModel().getSelectedItem();
         
-        Alert confirmation = new Alert(AlertType.CONFIRMATION);
-        confirmation.setTitle("Delete record");
-        confirmation.setHeaderText("Are you sure want to remove this record?");
-        
-        Optional<ButtonType> option = confirmation.showAndWait();
-        if (option.get() == ButtonType.OK) {
+        if (GUI.showConfirmation("Delete record", "Are you sure want to remove this record?")) {
             if (!cleanSearchConfirmation()) {
                 return;
             }
 
             try {
                 console.logWarning("Trying to remove record...");
-                model.removeData(d.getId());
+                devicesModel.removeData(d.getId());
                 loadData(null);
                 console.logSuccess("Successfully removed record");
             }
@@ -118,7 +112,7 @@ public class MainSceneController {
         d.setType(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
-            model.updateData(d.getId(), "type", d.getType());
+            devicesModel.updateData(d.getId(), "type", d.getType());
             console.logSuccess("Table updated");
         }
         catch (SQLException e) {
@@ -131,7 +125,7 @@ public class MainSceneController {
         d.setLocation(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
-            model.updateData(d.getId(), "location", d.getLocation());
+            devicesModel.updateData(d.getId(), "location", d.getLocation());
             console.logSuccess("Table updated");
         }
         catch (SQLException e) {
@@ -144,7 +138,7 @@ public class MainSceneController {
         d.setToFixes(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
-            model.updateData(d.getId(), "toFixes", d.getToFixes());
+            devicesModel.updateData(d.getId(), "toFixes", d.getToFixes());
             console.logSuccess("Table updated");
         }
         catch (SQLException e) {
@@ -160,7 +154,7 @@ public class MainSceneController {
         ResultSet res = null;
         try {
             console.logWarning("Trying to read DB...");
-            res = model.readData();
+            res = devicesModel.readAllData();
             console.logSuccess("Data read");
         }
         catch (Exception e) {
@@ -213,11 +207,7 @@ public class MainSceneController {
     public boolean cleanSearchConfirmation() {
         String search = searchTextField.textProperty().get();
         if (search != null && !search.isEmpty()) {
-            Alert confirmation = new Alert(AlertType.CONFIRMATION);
-            confirmation.setTitle("Are you sure?");
-            confirmation.setHeaderText("Search parameters will be reset. Continue?");
-            Optional<ButtonType> option = confirmation.showAndWait();
-            if (option.get() != ButtonType.OK) {
+            if (!GUI.showConfirmation("Are you sure?", "Search parameters will be reset. Continue?")) {
                 return false;
             }
         }
