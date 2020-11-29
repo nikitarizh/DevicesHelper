@@ -12,3 +12,4 @@ Download .jar file from the latest release and launch it
 ## Important
 Database is stored in the folder where Devices Helper is placed
 Database filename is db.db, so if you have one you can just place it next to the .jar file
+**If no db file found, it will be created next to the .jar file**
