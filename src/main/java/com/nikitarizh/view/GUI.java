@@ -19,10 +19,10 @@ public class GUI extends Application {
     public void start(Stage stage) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/template.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/mainTemplate.fxml"));
         }
         catch (Exception e) {
-            System.out.println("Error loading template");
+            System.out.println("Error loading main template");
             e.printStackTrace();
             System.exit(1);
         }

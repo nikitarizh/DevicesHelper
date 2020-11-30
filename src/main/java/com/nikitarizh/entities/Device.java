@@ -6,20 +6,21 @@ public class Device {
     private SimpleIntegerProperty id;
     private SimpleStringProperty type;
     private SimpleStringProperty location;
-    private SimpleStringProperty toFixes;
+    private SimpleStringProperty status;
+    private SimpleStringProperty serial;
 
-    public Device(String type, String location, String toFixes) {
+    public Device(String type, String location, String status) {
         this.id = null;
         this.type = new SimpleStringProperty(type);
         this.location = new SimpleStringProperty(location);
-        this.toFixes = new SimpleStringProperty(toFixes);
+        this.status = new SimpleStringProperty(status);
     }
 
-    public Device(int id, String type, String location, String toFixes) {
+    public Device(int id, String type, String location, String status) {
         this.id = new SimpleIntegerProperty(id);
         this.type = new SimpleStringProperty(type);
         this.location = new SimpleStringProperty(location);
-        this.toFixes = new SimpleStringProperty(toFixes);
+        this.status = new SimpleStringProperty(status);
     }
 
     public int getId() {
@@ -58,15 +59,15 @@ public class Device {
         return location;
     }
 
-    public String getToFixes() {
-        return toFixes.get();
+    public String getStatus() {
+        return status.get();
     }
 
-    public void setToFixes(String toFixes) {
-        this.toFixes.set(toFixes);
+    public void setStatus(String status) {
+        this.status.set(status);
     }
 
-    public StringProperty toFixesProperty() {
-        return toFixes;
+    public StringProperty statusProperty() {
+        return status;
     }
 }

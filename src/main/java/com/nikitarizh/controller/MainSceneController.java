@@ -43,7 +43,7 @@ public class MainSceneController {
             devicesModel = new DevicesModel();
             typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
             locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-            statusColumn.setCellValueFactory(new PropertyValueFactory<>("toFixes"));
+            statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
             console.logSuccess("DB connected!");
         }
         catch (SQLException e) {
@@ -135,10 +135,10 @@ public class MainSceneController {
 
     public void statusColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
         Device d = devicesTable.getSelectionModel().getSelectedItem();
-        d.setToFixes(editEvent.getNewValue());
+        d.setStatus(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
-            devicesModel.updateData(d.getId(), "toFixes", d.getToFixes());
+            devicesModel.updateData(d.getId(), "status", d.getStatus());
             console.logSuccess("Table updated");
         }
         catch (SQLException e) {
@@ -169,7 +169,7 @@ public class MainSceneController {
                 int id = res.getInt("id");
                 String type = res.getString("type");
                 String location = res.getString("location");
-                String fixes = res.getString("toFixes");
+                String fixes = res.getString("status");
                 if (fixes == null || fixes.trim() == "") {
                     fixes = "OK";
                 }

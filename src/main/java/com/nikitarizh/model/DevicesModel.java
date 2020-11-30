@@ -10,7 +10,7 @@ public class DevicesModel extends Model {
     }
 
     public void createTable() throws ClassNotFoundException, SQLException {
-        stmt = conn.prepareStatement("CREATE TABLE if not exists 'devices' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' TEXT NOT NULL, 'location' TEXT NOT NULL, 'toFixes' TEXT);");
+        stmt = conn.prepareStatement("CREATE TABLE if not exists 'devices' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' TEXT NOT NULL, 'location' TEXT NOT NULL, 'status' TEXT);");
         stmt.execute();
     }
 	
@@ -22,11 +22,11 @@ public class DevicesModel extends Model {
 		return resSet;
     }
 
-    public void addData(String type, String location, String toFixes) throws SQLException {
-        stmt = conn.prepareStatement("INSERT INTO 'devices' ('type', 'location', 'toFixes') VALUES (?, ?, ?);");
+    public void addData(String type, String location, String status) throws SQLException {
+        stmt = conn.prepareStatement("INSERT INTO 'devices' ('type', 'location', 'status') VALUES (?, ?, ?);");
         stmt.setString(1, type);
         stmt.setString(2, location);
-        stmt.setString(3, toFixes);
+        stmt.setString(3, status);
         stmt.execute();
     }
     
