@@ -14,12 +14,20 @@ public class DevicesModel extends Model {
         stmt.execute();
     }
 	
-	public ResultSet readAllData() throws ClassNotFoundException, SQLException {
+	public ResultSet loadAllData() throws ClassNotFoundException, SQLException {
         stmt = conn.prepareStatement("SELECT * FROM devices");
         stmt.execute();
         resSet = stmt.getResultSet();
 		
 		return resSet;
+    }
+
+    public ResultSet loadData(int id) throws ClassNotFoundException, SQLException {
+        stmt = conn.prepareStatement("SELECT * FROM devices WHERE id = ?");
+        stmt.setInt(1, id);
+        resSet = stmt.getResultSet();
+
+        return resSet;
     }
 
     public void addData(String type, String location, String status) throws SQLException {

@@ -15,5 +15,5 @@ public abstract class Model {
     
     public abstract void createTable() throws ClassNotFoundException, SQLException;
 
-    public abstract ResultSet readAllData() throws ClassNotFoundException, SQLException;
+    public abstract ResultSet loadAllData() throws ClassNotFoundException, SQLException;
 }

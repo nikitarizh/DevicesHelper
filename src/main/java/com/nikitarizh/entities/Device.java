@@ -14,6 +14,7 @@ public class Device {
         this.type = new SimpleStringProperty(type);
         this.location = new SimpleStringProperty(location);
         this.status = new SimpleStringProperty(status);
+        this.serial = new SimpleStringProperty("");
     }
 
     public Device(int id, String type, String location, String status) {
@@ -21,6 +22,7 @@ public class Device {
         this.type = new SimpleStringProperty(type);
         this.location = new SimpleStringProperty(location);
         this.status = new SimpleStringProperty(status);
+        this.serial = new SimpleStringProperty("");
     }
 
     public int getId() {
@@ -69,5 +71,17 @@ public class Device {
 
     public StringProperty statusProperty() {
         return status;
+    }
+
+    public String getSerial() {
+        return serial.get();
+    }
+
+    public void setSerial(String serial) {
+        this.serial.set(serial);
+    }
+
+    public StringProperty serialProperty() {
+        return serial;
     }
 }

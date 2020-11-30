@@ -1,5 +1,9 @@
 package com.nikitarizh.view;
 
+import com.nikitarizh.controller.DeviceSceneController;
+import com.nikitarizh.entities.Device;
+
+import java.io.IOException;
 import java.util.Optional;
 
 import javafx.application.Application;
@@ -44,5 +48,28 @@ public class GUI extends Application {
             return false;
         }
         return true;
+    }
+
+    public static void showDeviceWindow(Device device) {
+        FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/deviceTemplate.fxml"));
+
+        Stage stage = new Stage();
+    
+        stage.setTitle("Device");
+        stage.setResizable(false);
+
+        try {
+            stage.setScene(new Scene(loader.load()));
+        }
+        catch (Exception e) {
+            System.out.println("Error loading device template");
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        DeviceSceneController controller = (DeviceSceneController) loader.getController();
+        controller.initData(device);
+
+        stage.show();
     }
 }

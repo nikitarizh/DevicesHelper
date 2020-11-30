@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nikitarizh.controller.DeviceSceneController">
+   <children>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="364.0">
+         <children>
+            <ImageView fx:id="deviceThumbnail" fitHeight="36.0" fitWidth="80.0" layoutX="14.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="24.0" layoutY="70.0" text="image here" />
+            <Pane layoutX="94.0" layoutY="14.0" prefHeight="119.0" prefWidth="261.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="16.0" text="Type" />
+                  <Line endX="-66.6185302734375" layoutX="110.0" layoutY="42.0" startX="-96.5" />
+                  <Label layoutX="14.0" layoutY="50.0" text="Location" />
+                  <Line endX="-60.7668571472168" endY="1.52587890625E-5" layoutX="104.0" layoutY="75.0" startX="-90.5" />
+                  <Line endX="-68.363525390625" endY="0.067535400390625" layoutX="112.0" layoutY="109.0" startX="-98.5" startY="0.067535400390625" />
+                  <Label layoutX="12.0" layoutY="86.0" text="Serial" />
+                  <TextField fx:id="typeField" layoutX="95.0" layoutY="11.0" style="-fx-background-color: #fff; -fx-background-radius: 2px;" />
+                  <TextField fx:id="locationField" layoutX="95.0" layoutY="46.0" style="-fx-background-color: #fff; -fx-background-radius: 2px;" />
+                  <TextField fx:id="serialField" layoutX="94.0" layoutY="81.0" style="-fx-background-color: #fff; -fx-background-radius: 2px;" />
+               </children>
+            </Pane>
+            <Pane layoutY="133.0" prefHeight="200.0" prefWidth="363.0">
+               <children>
+                  <Label layoutX="17.0" layoutY="88.0" text="Status" />
+                  <ScrollPane layoutX="70.0" layoutY="-2.0" style="-fx-border-width: 0; -fx-background-color: #fff; -fx-background-radius: 2;">
+                     <content>
+                        <TextArea fx:id="statusField" prefHeight="196.0" prefWidth="280.0" style="-fx-background-color: #fff; -fx-background-radius: 2px;" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</VBox>

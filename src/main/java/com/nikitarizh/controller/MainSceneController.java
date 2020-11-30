@@ -5,7 +5,8 @@ import com.nikitarizh.model.*;
 import com.nikitarizh.util.*;
 import com.nikitarizh.view.GUI;
 
-import java.sql.*;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -150,11 +151,17 @@ public class MainSceneController {
         loadData(newValue);
     }
 
+    public void openDeviceWindowKeyPressed() {
+        Device d = devicesTable.getFocusModel().getFocusedItem();
+        System.out.println("d: " + d);
+        GUI.showDeviceWindow(d);
+    }
+
     public void loadData(String search) {
         ResultSet res = null;
         try {
             console.logWarning("Trying to read DB...");
-            res = devicesModel.readAllData();
+            res = devicesModel.loadAllData();
             console.logSuccess("Data read");
         }
         catch (Exception e) {

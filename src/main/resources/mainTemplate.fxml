@@ -35,6 +35,7 @@
                         <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
                         <Button layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onAction="#removeButtonClicked" text="Remove" />
                         <TextField fx:id="searchTextField" layoutX="177.0" layoutY="14.0" onTextChange="#searchInputKeyPressed" promptText="Search" />
+                        <Button layoutX="361.0" layoutY="14.0" mnemonicParsing="false" onAction="#openDeviceWindowKeyPressed" text="Open Device window" />
                      </children>
                   </AnchorPane>
             </content>
