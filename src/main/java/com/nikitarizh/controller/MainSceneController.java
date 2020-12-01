@@ -153,7 +153,6 @@ public class MainSceneController {
 
     public void openDeviceWindowKeyPressed() {
         Device d = devicesTable.getFocusModel().getFocusedItem();
-        System.out.println("d: " + d);
         GUI.showDeviceWindow(d);
     }
 

@@ -23,7 +23,7 @@ public class GUI extends Application {
     public void start(Stage stage) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/mainTemplate.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/FXML/mainTemplate.fxml"));
         }
         catch (Exception e) {
             System.out.println("Error loading main template");
@@ -51,7 +51,7 @@ public class GUI extends Application {
     }
 
     public static void showDeviceWindow(Device device) {
-        FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/deviceTemplate.fxml"));
+        FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/FXML/deviceTemplate.fxml"));
 
         Stage stage = new Stage();
     
