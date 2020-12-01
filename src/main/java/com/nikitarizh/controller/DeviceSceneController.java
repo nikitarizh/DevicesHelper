@@ -1,12 +1,10 @@
 package com.nikitarizh.controller;
 
-import java.io.File;
 import java.sql.SQLException;
 
 import com.nikitarizh.entities.*;
 import com.nikitarizh.model.*;
 import com.nikitarizh.util.*;
-import com.nikitarizh.view.GUI;
 
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -32,6 +30,7 @@ public class DeviceSceneController {
     private DevicesModel devicesModel;
     private Console console;
 
+    @FXML
     public void initialize() {
     }
 
@@ -67,6 +66,7 @@ public class DeviceSceneController {
         }
     }
 
+    @FXML
     public void typeFieldChanged(ObservableValue<String> observable, String oldValue, String newValue) {
 
         device.setType(newValue);
@@ -80,6 +80,7 @@ public class DeviceSceneController {
         }
     }
 
+    @FXML
     public void locationFieldChanged(ObservableValue<String> observable, String oldValue, String newValue) {
 
         device.setLocation(newValue);
@@ -93,6 +94,7 @@ public class DeviceSceneController {
         }
     }
 
+    @FXML
     public void serialFieldChanged(ObservableValue<String> observable, String oldValue, String newValue) {
 
         device.setSerial(newValue);
@@ -106,6 +108,7 @@ public class DeviceSceneController {
         }
     }
 
+    @FXML
     public void statusFieldChanged(ObservableValue<String> observable, String oldValue, String newValue) {
 
         device.setStatus(newValue);

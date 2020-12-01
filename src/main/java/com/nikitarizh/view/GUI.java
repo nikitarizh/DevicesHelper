@@ -4,7 +4,6 @@ import com.nikitarizh.controller.DeviceSceneController;
 import com.nikitarizh.entities.Device;
 import com.nikitarizh.util.Console;
 
-import java.io.IOException;
 import java.util.Optional;
 
 import javafx.application.Application;

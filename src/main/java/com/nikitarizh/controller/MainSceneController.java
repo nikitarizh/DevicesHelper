@@ -36,6 +36,7 @@ public class MainSceneController {
     private Console console;
     private DevicesModel devicesModel;
 
+    @FXML
     public void initialize() {
         console = new Console(consoleField);
 
@@ -62,6 +63,7 @@ public class MainSceneController {
         loadData(null);
     }
 
+    @FXML
     public void loadDataButtonClicked() {
         if (!cleanSearchConfirmation()) {
             return;
@@ -70,6 +72,7 @@ public class MainSceneController {
         loadData(null);
     }
 
+    @FXML
     public void addButtonClicked() {
         if (!cleanSearchConfirmation()) {
             return;
@@ -87,6 +90,7 @@ public class MainSceneController {
         }
     }
 
+    @FXML
     public void removeButtonClicked() {
         Device d = devicesTable.getSelectionModel().getSelectedItem();
         
@@ -108,6 +112,7 @@ public class MainSceneController {
         } 
     }
 
+    @FXML
     public void typeColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
         Device d = devicesTable.getSelectionModel().getSelectedItem();
         d.setType(editEvent.getNewValue());
@@ -121,6 +126,7 @@ public class MainSceneController {
         }
     }
 
+    @FXML
     public void locationColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
         Device d = devicesTable.getSelectionModel().getSelectedItem();
         d.setLocation(editEvent.getNewValue());
@@ -134,6 +140,7 @@ public class MainSceneController {
         }
     }
 
+    @FXML
     public void statusColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
         Device d = devicesTable.getSelectionModel().getSelectedItem();
         d.setStatus(editEvent.getNewValue());
@@ -147,10 +154,12 @@ public class MainSceneController {
         }
     }
 
+    @FXML
     public void searchInputKeyPressed(ObservableValue<String> observable, String oldValue, String newValue) {
         loadData(newValue);
     }
 
+    @FXML
     public void openDeviceWindowKeyPressed() {
         Device d = devicesTable.getFocusModel().getFocusedItem();
         GUI.showDeviceWindow(d, console);
