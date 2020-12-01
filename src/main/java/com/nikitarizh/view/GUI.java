@@ -2,6 +2,7 @@ package com.nikitarizh.view;
 
 import com.nikitarizh.controller.DeviceSceneController;
 import com.nikitarizh.entities.Device;
+import com.nikitarizh.util.Console;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class GUI extends Application {
         return true;
     }
 
-    public static void showDeviceWindow(Device device) {
+    public static void showDeviceWindow(Device device, Console console) {
         FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/FXML/deviceTemplate.fxml"));
 
         Stage stage = new Stage();
@@ -68,7 +69,7 @@ public class GUI extends Application {
         }
 
         DeviceSceneController controller = (DeviceSceneController) loader.getController();
-        controller.initData(device);
+        controller.initData(device, console);
 
         stage.show();
     }

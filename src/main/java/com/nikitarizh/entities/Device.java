@@ -9,20 +9,12 @@ public class Device {
     private SimpleStringProperty status;
     private SimpleStringProperty serial;
 
-    public Device(String type, String location, String status) {
-        this.id = null;
-        this.type = new SimpleStringProperty(type);
-        this.location = new SimpleStringProperty(location);
-        this.status = new SimpleStringProperty(status);
-        this.serial = new SimpleStringProperty("");
-    }
-
-    public Device(int id, String type, String location, String status) {
+    public Device(int id, String type, String location, String status, String serial) {
         this.id = new SimpleIntegerProperty(id);
         this.type = new SimpleStringProperty(type);
         this.location = new SimpleStringProperty(location);
         this.status = new SimpleStringProperty(status);
-        this.serial = new SimpleStringProperty("");
+        this.serial = new SimpleStringProperty(serial);
     }
 
     public int getId() {

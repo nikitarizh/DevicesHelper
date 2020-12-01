@@ -77,7 +77,7 @@ public class MainSceneController {
 
         try {
             console.logWarning("Trying to add blank value...");
-            devicesModel.addData("type", "location", "OK");
+            devicesModel.addData("type", "location", "OK", "");
             loadData(null);
             console.logSuccess("Blank value has been added");
         }
@@ -113,7 +113,7 @@ public class MainSceneController {
         d.setType(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
-            devicesModel.updateData(d.getId(), "type", d.getType());
+            devicesModel.updateType(d.getId(), d.getType());
             console.logSuccess("Table updated");
         }
         catch (SQLException e) {
@@ -126,7 +126,7 @@ public class MainSceneController {
         d.setLocation(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
-            devicesModel.updateData(d.getId(), "location", d.getLocation());
+            devicesModel.updateLocation(d.getId(), d.getLocation());
             console.logSuccess("Table updated");
         }
         catch (SQLException e) {
@@ -139,7 +139,7 @@ public class MainSceneController {
         d.setStatus(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
-            devicesModel.updateData(d.getId(), "status", d.getStatus());
+            devicesModel.updateStatus(d.getId(), d.getStatus());
             console.logSuccess("Table updated");
         }
         catch (SQLException e) {
@@ -153,7 +153,7 @@ public class MainSceneController {
 
     public void openDeviceWindowKeyPressed() {
         Device d = devicesTable.getFocusModel().getFocusedItem();
-        GUI.showDeviceWindow(d);
+        GUI.showDeviceWindow(d, console);
     }
 
     public void loadData(String search) {
@@ -175,14 +175,15 @@ public class MainSceneController {
                 int id = res.getInt("id");
                 String type = res.getString("type");
                 String location = res.getString("location");
-                String fixes = res.getString("status");
-                if (fixes == null || fixes.trim() == "") {
-                    fixes = "OK";
+                String status = res.getString("status");
+                String serial = res.getString("serial");
+                if (status == null || status.isEmpty()) {
+                    status = "OK";
                 }
 
                 if (search != null && !search.isEmpty()) {
                     search = search.trim().toLowerCase();
-                    String fullData = type + " " + location + " " + fixes;
+                    String fullData = type + " " + location + " " + status;
                     fullData = fullData.toLowerCase();
                     String[] splittedSearch = search.split(" ");
                     boolean ok = true;
@@ -193,11 +194,11 @@ public class MainSceneController {
                     }
                     
                     if (ok) {
-                        data.add(new Device(id, type, location, fixes));
+                        data.add(new Device(id, type, location, status, serial));
                     }
                 }
                 else {
-                    data.add(new Device(id, type, location, fixes));
+                    data.add(new Device(id, type, location, status, serial));
                 }
                 
             }
