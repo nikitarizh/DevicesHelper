@@ -165,6 +165,12 @@ public class MainSceneController {
         GUI.showDeviceWindow(d, console);
     }
 
+    /**
+     * Loads data from database
+     * <p>
+     * Performs search if search param is not null and not empty
+     * @param search
+     */
     public void loadData(String search) {
         ResultSet res = null;
         try {
@@ -220,6 +226,12 @@ public class MainSceneController {
         }
     }
 
+    /**
+     * Shows confirmation window (for cases when it's neccessary to reset the search text field)
+     * <p>
+     * If user agreed with search field reset, resets it
+     * @return returns TRUE if user agreed with search field reset, FALSE otherwise
+     */
     public boolean cleanSearchConfirmation() {
         String search = searchTextField.textProperty().get();
         if (search != null && !search.isEmpty()) {

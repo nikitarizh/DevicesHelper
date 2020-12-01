@@ -34,6 +34,11 @@ public class DeviceSceneController {
     public void initialize() {
     }
 
+    /**
+     * Gets information about specified Device
+     * @param d
+     * @param c
+     */
     public void initData(Device d, Console c) {
         
         console = c;
