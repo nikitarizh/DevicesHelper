@@ -17,11 +17,19 @@ public class Console {
 
     private DateTimeFormatter dtf;
     
+    /**
+     * Initializes Console instance
+     * @param c (TextFlow instance)
+     */
     public Console(TextFlow c) {
         console = c;
         dtf = DateTimeFormatter.ofPattern("dd.MM.yyy HH:mm:ss");  
     }
 
+    /**
+     * Logs success (green text) in Console
+     * @param text
+     */
     public void logSuccess(String text) {
         Text t = new Text();
         t.setStyle("-fx-fill: " + COLOR_GREEN + ";-fx-font-weight:200;\n");
@@ -29,6 +37,10 @@ public class Console {
         pushText(t);
     }
 
+    /**
+     * Logs warning (yellow text) in Console
+     * @param text
+     */
     public void logWarning(String text) {
         Text t = new Text();
         t.setStyle("-fx-fill: " + COLOR_WARNING + ";-fx-font-weight:200;\n");
@@ -36,6 +48,10 @@ public class Console {
         pushText(t);
     }
 
+    /**
+     * Logs error (green text) in Console
+     * @param text
+     */
     public void logError(String text) {
         Text t = new Text();
         t.setStyle("-fx-fill: " + COLOR_RED + ";-fx-font-weight:200;\n");
@@ -43,6 +59,10 @@ public class Console {
         pushText(t);
     }
 
+    /**
+     * Borders max size of Console TextFlow
+     * @param t (Text instance)
+     */
     private void pushText(Text t) {
         if (console.getChildren().size() >= maxLength) {
             console.getChildren().remove(0);

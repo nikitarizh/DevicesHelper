@@ -39,6 +39,12 @@ public class GUI extends Application {
         stage.show();
     }
 
+    /**
+     * Shows confirmation window
+     * @param title
+     * @param text
+     * @return TRUE if user agreed, FALSE otherwise
+     */
     public static boolean showConfirmation(String title, String text) {
         Alert confirmation = new Alert(AlertType.CONFIRMATION);
         confirmation.setTitle(title);
@@ -50,6 +56,11 @@ public class GUI extends Application {
         return true;
     }
 
+    /**
+     * Shows Device window
+     * @param device
+     * @param console
+     */
     public static void showDeviceWindow(Device device, Console console) {
         FXMLLoader loader = new FXMLLoader(GUI.class.getResource("/FXML/deviceTemplate.fxml"));
 
