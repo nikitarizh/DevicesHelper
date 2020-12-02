@@ -63,7 +63,7 @@ public class DeviceSceneController {
         statusField.setText(device.getStatus());
 
         try {
-            Image image = new Image(DeviceSceneController.class.getResource("/img/" + device.getType() + ".png").toString());
+            Image image = new Image(DeviceSceneController.class.getResource("/img/" + device.getType().toLowerCase() + ".png").toString());
             deviceThumbnail.setImage(image);
         }
         catch (Exception e) {
