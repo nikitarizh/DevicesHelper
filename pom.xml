@@ -56,23 +56,25 @@
 
             <!-- PACKAGE ALL DEPENDENCIES INTO JAR AND MAKE JAR EXECUTABLE -->
             <plugin>
-                <groupId>com.jolira</groupId>
-                <artifactId>onejar-maven-plugin</artifactId>
-                <version>1.4.4</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
                 <executions>
                     <execution>
-                        <configuration>
-                            <mainClass>${main.class}</mainClass>
-                            <attachToBuild>true</attachToBuild>
-                            <filename>Devices Helper.jar</filename>
-                        </configuration>
+                        <phase>package</phase>
                         <goals>
-                            <goal>one-jar</goal>
+                            <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${main.class}</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
                     </execution>
                 </executions>
-            </plugin>
-
+              </plugin>
         </plugins>
     </build>
 </project>

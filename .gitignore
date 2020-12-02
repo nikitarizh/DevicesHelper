@@ -10,3 +10,4 @@ target/
 .project
 .classpath
 db.db
+dependency-reduced-pom.xml
