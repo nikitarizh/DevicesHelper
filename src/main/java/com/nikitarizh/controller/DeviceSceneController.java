@@ -67,7 +67,7 @@ public class DeviceSceneController {
             deviceThumbnail.setImage(image);
         }
         catch (Exception e) {
-            System.out.println("Device thumb loading error");
+            System.out.println("Device thumb loading error: " + e.getMessage());
             System.out.println("Trying to load default thumbnail...");
             try {
                 Image image = new Image(DeviceSceneController.class.getResource("/img/default.png").toString());
@@ -75,7 +75,7 @@ public class DeviceSceneController {
                 System.out.println("Default thumbnail loaded");
             }
             catch (Exception e1) {
-                System.out.println("Error loading default thumbnail");
+                System.out.println("Error loading default thumbnail: " + e1.getMessage());
             }
         }
     }
