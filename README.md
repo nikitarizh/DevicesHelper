@@ -6,7 +6,7 @@ A tool to store data about devices in your organization
 ## What is it built with?
 Java
 ## Why Java?
-Cross-platform usage (Linux, Windows)
+Cross-platform usage (Linux, Windows, Mac OS)
 ## How to use?
 Download .jar file from the latest release and launch it
 ## Important
