@@ -17,7 +17,7 @@
    <children>
       <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-            <Tab text="Operating Devices">
+            <Tab onSelectionChanged="#operatingDevicesTabSelected" text="Operating Devices">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -36,14 +36,14 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Storage">
+            <Tab onSelectionChanged="#storageTabSelected" text="Storage">
                <content>
                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="storageDevicesTable" layoutX="14.0" layoutY="52.0" prefHeight="306.0" prefWidth="573.0">
                            <columns>
                               <TableColumn fx:id="storageTypeColumn" minWidth="-1.0" onEditCommit="#typeColumnChanged" prefWidth="-1.0" text="Type" />
-                              <TableColumn fx:id="storageLocationColumn" minWidth="-1.0" onEditCommit="#locationColumnChanged" prefWidth="-1.0" text="Location" />
+                              <TableColumn fx:id="storageSerialColumn" minWidth="-1.0" onEditCommit="#serialColumnChanged" prefWidth="-1.0" text="Serial" />
                               <TableColumn fx:id="storageStatusColumn" minWidth="-1.0" onEditCommit="#statusColumnChanged" prefWidth="136.0" text="Status" />
                            </columns>
                            <columnResizePolicy>

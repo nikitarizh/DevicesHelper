@@ -27,7 +27,7 @@ public class MainSceneController {
     @FXML
     private TableColumn<Device, String> storageTypeColumn;
     @FXML
-    private TableColumn<Device, String> storageLocationColumn;
+    private TableColumn<Device, String> storageSerialColumn;
     @FXML
     private TableColumn<Device, String> storageStatusColumn;
     @FXML
@@ -56,7 +56,7 @@ public class MainSceneController {
             devicesModel = new DevicesModel();
 
             storageTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-            storageLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+            storageSerialColumn.setCellValueFactory(new PropertyValueFactory<>("serial"));
             storageStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
             operatingTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -74,7 +74,7 @@ public class MainSceneController {
 
         storageDevicesTable.setEditable(true);
         storageTypeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        storageLocationColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        storageSerialColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         storageStatusColumn.setCellFactory(TextAreaTableCell.forTableColumn());
 
         operatingDevicesTable.setRowFactory( tv -> {
@@ -161,12 +161,12 @@ public class MainSceneController {
     }
 
     @FXML
-    public void locationColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
+    public void serialColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
         Device d = storageDevicesTable.getSelectionModel().getSelectedItem();
-        d.setLocation(editEvent.getNewValue());
+        d.setSerial(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
-            devicesModel.updateLocation(d.getId(), d.getLocation());
+            devicesModel.updateSerial(d.getId(), d.getSerial());
             console.logSuccess("Table updated");
         }
         catch (SQLException e) {
@@ -199,6 +199,13 @@ public class MainSceneController {
         GUI.showDeviceWindow(d, console);
     }
 
+    @FXML
+    public void storageTabSelected() {
+        if (storageSearchTextField != null && storageSearchTextField.textProperty() != null) {
+            loadData(storageSearchTextField.textProperty().get(), "storage");
+        }
+    }
+
     // *****************
     // *** OPERATING ***
     // *****************
@@ -211,6 +218,13 @@ public class MainSceneController {
     @FXML
     public void operatingColumnClicked(Device d) {
         GUI.showDeviceWindow(d, console);
+    }
+
+    @FXML
+    public void operatingDevicesTabSelected() {
+        if (operatingSearchTextField != null && operatingSearchTextField.textProperty() != null) {
+            loadData(operatingSearchTextField.textProperty().get(), "operating");
+        }
     }
 
     /**
@@ -246,7 +260,13 @@ public class MainSceneController {
 
                 if (search != null && !search.isEmpty()) {
                     search = search.trim().toLowerCase();
-                    String fullData = type + " " + location + " " + status;
+                    String fullData = "";
+                    if (tab == "operating") {
+                        fullData = type + " " + location + " " + status;
+                    }
+                    else {
+                        fullData = type + " " + serial + " " + status;
+                    }
                     fullData = fullData.toLowerCase();
                     String[] splittedSearch = search.split(" ");
                     boolean ok = true;
