@@ -17,15 +17,34 @@
    <children>
       <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Operating devices">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Tab text="Operating Devices">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="devicesTable" layoutX="14.0" layoutY="52.0" prefHeight="306.0" prefWidth="573.0">
+                        <TableView fx:id="operatingDevicesTable" layoutX="14.0" layoutY="52.0" prefHeight="306.0" prefWidth="573.0">
+                          <columns>
+                            <TableColumn fx:id="operatingTypeColumn" prefWidth="75.0" text="Type" />
+                            <TableColumn fx:id="operatingLocationColumn" prefWidth="75.0" text="Location" />
+                              <TableColumn fx:id="operatingStatusColumn" prefWidth="75.0" text="Status" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <TextField fx:id="operatingSearchTextField" layoutX="14.0" layoutY="14.0" onTextChange="#operatingSearchInputKeyPressed" promptText="Search" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Storage">
+               <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="storageDevicesTable" layoutX="14.0" layoutY="52.0" prefHeight="306.0" prefWidth="573.0">
                            <columns>
-                              <TableColumn fx:id="typeColumn" minWidth="-1.0" onEditCommit="#typeColumnChanged" prefWidth="-1.0" text="Type" />
-                              <TableColumn fx:id="locationColumn" minWidth="-1.0" onEditCommit="#locationColumnChanged" prefWidth="-1.0" text="Location" />
-                              <TableColumn fx:id="statusColumn" minWidth="-1.0" onEditCommit="#statusColumnChanged" prefWidth="136.0" text="Status" />
+                              <TableColumn fx:id="storageTypeColumn" minWidth="-1.0" onEditCommit="#typeColumnChanged" prefWidth="-1.0" text="Type" />
+                              <TableColumn fx:id="storageLocationColumn" minWidth="-1.0" onEditCommit="#locationColumnChanged" prefWidth="-1.0" text="Location" />
+                              <TableColumn fx:id="storageStatusColumn" minWidth="-1.0" onEditCommit="#statusColumnChanged" prefWidth="136.0" text="Status" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -34,12 +53,12 @@
                         <Button layoutX="78.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadDataButtonClicked" text="Load data" />
                         <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
                         <Button layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onAction="#removeButtonClicked" text="Remove" />
-                        <TextField fx:id="searchTextField" layoutX="177.0" layoutY="14.0" onTextChange="#searchInputKeyPressed" promptText="Search" />
+                        <TextField fx:id="storageSearchTextField" layoutX="177.0" layoutY="14.0" onTextChange="#storageSearchInputKeyPressed" promptText="Search" />
                         <Button layoutX="361.0" layoutY="14.0" mnemonicParsing="false" onAction="#openDeviceWindowKeyPressed" text="Open Device window" />
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
+               </content>
+            </Tab>
           <Tab text="Console">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -49,7 +68,7 @@
                               <TextFlow fx:id="consoleField" layoutX="-417.0" layoutY="27.0" prefHeight="334.0" prefWidth="578.0" style="-fx-background-color: #fff; -fx-border-width: 1px; -fx-border-color: #7f7f7f; -fx-border-radius: 2px;" />
                            </children>
                         </Pane>
-                        <Text layoutX="13.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Console" textAlignment="CENTER" wrappingWidth="573.9287109375">
+                        <Text layoutX="13.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Console" wrappingWidth="573.9287109375">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>

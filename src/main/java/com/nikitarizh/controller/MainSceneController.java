@@ -23,15 +23,26 @@ public class MainSceneController {
     private TextFlow consoleField;
 
     @FXML
-    private TableView<Device> devicesTable;
+    private TableView<Device> storageDevicesTable;
     @FXML
-    private TableColumn<Device, String> typeColumn;
+    private TableColumn<Device, String> storageTypeColumn;
     @FXML
-    private TableColumn<Device, String> locationColumn;
+    private TableColumn<Device, String> storageLocationColumn;
     @FXML
-    private TableColumn<Device, String> statusColumn;
+    private TableColumn<Device, String> storageStatusColumn;
     @FXML
-    private TextField searchTextField;
+    private TextField storageSearchTextField;
+
+    @FXML
+    private TableView<Device> operatingDevicesTable;
+    @FXML
+    private TableColumn<Device, String> operatingTypeColumn;
+    @FXML
+    private TableColumn<Device, String> operatingLocationColumn;
+    @FXML
+    private TableColumn<Device, String> operatingStatusColumn;
+    @FXML
+    private TextField operatingSearchTextField;
     
     private Console console;
     private DevicesModel devicesModel;
@@ -43,9 +54,15 @@ public class MainSceneController {
         try {
             console.logWarning("Connecting DB...");
             devicesModel = new DevicesModel();
-            typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-            locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-            statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+            storageTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+            storageLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+            storageStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+            operatingTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+            operatingLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+            operatingStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
             console.logSuccess("DB connected!");
         }
         catch (SQLException e) {
@@ -55,33 +72,50 @@ public class MainSceneController {
             console.logError("Connecting DB failed (Class exception)");
         }
 
-        devicesTable.setEditable(true);
-        typeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        locationColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        statusColumn.setCellFactory(TextAreaTableCell.forTableColumn());
+        storageDevicesTable.setEditable(true);
+        storageTypeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        storageLocationColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        storageStatusColumn.setCellFactory(TextAreaTableCell.forTableColumn());
 
-        loadData(null);
+        operatingDevicesTable.setRowFactory( tv -> {
+            TableRow<Device> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Device d = row.getItem();
+                    operatingColumnClicked(d);
+                }
+            });
+            return row ;
+        });
+
+        loadData(null, "operating");
+        loadData(null, "storage");
     }
+
+    // ***************
+    // *** STORAGE ***
+    // ***************
 
     @FXML
     public void loadDataButtonClicked() {
-        if (!cleanSearchConfirmation()) {
+        if (!cleanSearchConfirmation("all")) {
             return;
         }
 
-        loadData(null);
+        loadData(null, "operating");
+        loadData(null, "storage");
     }
 
     @FXML
     public void addButtonClicked() {
-        if (!cleanSearchConfirmation()) {
+        if (!cleanSearchConfirmation("storage")) {
             return;
         }
 
         try {
             console.logWarning("Trying to add blank value...");
             devicesModel.addData("type", "location", "OK", "");
-            loadData(null);
+            loadData(null, "storage");
             console.logSuccess("Blank value has been added");
         }
         catch (Exception e) {
@@ -92,17 +126,17 @@ public class MainSceneController {
 
     @FXML
     public void removeButtonClicked() {
-        Device d = devicesTable.getSelectionModel().getSelectedItem();
+        Device d = storageDevicesTable.getSelectionModel().getSelectedItem();
         
         if (GUI.showConfirmation("Delete record", "Are you sure want to remove this record?")) {
-            if (!cleanSearchConfirmation()) {
+            if (!cleanSearchConfirmation("storage")) {
                 return;
             }
 
             try {
                 console.logWarning("Trying to remove record...");
                 devicesModel.removeData(d.getId());
-                loadData(null);
+                loadData(null, "storage");
                 console.logSuccess("Successfully removed record");
             }
             catch (SQLException e) {
@@ -114,7 +148,7 @@ public class MainSceneController {
 
     @FXML
     public void typeColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
-        Device d = devicesTable.getSelectionModel().getSelectedItem();
+        Device d = storageDevicesTable.getSelectionModel().getSelectedItem();
         d.setType(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
@@ -128,7 +162,7 @@ public class MainSceneController {
 
     @FXML
     public void locationColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
-        Device d = devicesTable.getSelectionModel().getSelectedItem();
+        Device d = storageDevicesTable.getSelectionModel().getSelectedItem();
         d.setLocation(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
@@ -142,7 +176,7 @@ public class MainSceneController {
 
     @FXML
     public void statusColumnChanged(TableColumn.CellEditEvent<Device, String> editEvent) {
-        Device d = devicesTable.getSelectionModel().getSelectedItem();
+        Device d = storageDevicesTable.getSelectionModel().getSelectedItem();
         d.setStatus(editEvent.getNewValue());
         try {
             console.logWarning("Trying to update table...");
@@ -155,13 +189,27 @@ public class MainSceneController {
     }
 
     @FXML
-    public void searchInputKeyPressed(ObservableValue<String> observable, String oldValue, String newValue) {
-        loadData(newValue);
+    public void storageSearchInputKeyPressed(ObservableValue<String> observable, String oldValue, String newValue) {
+        loadData(newValue, "storage");
     }
 
     @FXML
     public void openDeviceWindowKeyPressed() {
-        Device d = devicesTable.getFocusModel().getFocusedItem();
+        Device d = storageDevicesTable.getFocusModel().getFocusedItem();
+        GUI.showDeviceWindow(d, console);
+    }
+
+    // *****************
+    // *** OPERATING ***
+    // *****************
+
+    @FXML
+    public void operatingSearchInputKeyPressed(ObservableValue<String> observable, String oldValue, String newValue) {
+        loadData(newValue, "operating");
+    }
+
+    @FXML
+    public void operatingColumnClicked(Device d) {
         GUI.showDeviceWindow(d, console);
     }
 
@@ -171,7 +219,7 @@ public class MainSceneController {
      * Performs search if search param is not null and not empty
      * @param search
      */
-    public void loadData(String search) {
+    public void loadData(String search, String tab) {
         ResultSet res = null;
         try {
             console.logWarning("Trying to read DB...");
@@ -217,7 +265,15 @@ public class MainSceneController {
                 }
                 
             }
-            devicesTable.setItems(data);
+            console.logWarning("data length: " + data.size());
+            if (tab.equals("operating")) {
+                operatingDevicesTable.setItems(data);
+                console.logWarning("pushed length: " + data.size());
+            }
+            else {
+                storageDevicesTable.setItems(data);
+            }
+            
             console.logSuccess("ResultSet read");
         }
         catch (SQLException e) {
@@ -232,14 +288,31 @@ public class MainSceneController {
      * If user agreed with search field reset, resets it
      * @return returns TRUE if user agreed with search field reset, FALSE otherwise
      */
-    public boolean cleanSearchConfirmation() {
-        String search = searchTextField.textProperty().get();
+    public boolean cleanSearchConfirmation(String tab) {
+        String search = "";
+        if (tab.equals("operating")) {
+            operatingSearchTextField.textProperty().get();
+        }
+        else {
+            storageSearchTextField.textProperty().get();
+        }
+
         if (search != null && !search.isEmpty()) {
             if (!GUI.showConfirmation("Are you sure?", "Search parameters will be reset. Continue?")) {
                 return false;
             }
         }
-        searchTextField.clear();
+
+        if (tab.equals("operating")) {
+            operatingSearchTextField.clear();
+        }
+        else if (tab.equals("storage")) {
+            storageSearchTextField.clear();
+        }
+        else {
+            operatingSearchTextField.clear();
+            storageSearchTextField.clear();
+        }
         return true;
     }
 }
