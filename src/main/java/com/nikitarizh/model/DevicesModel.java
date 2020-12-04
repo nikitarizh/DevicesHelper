@@ -2,6 +2,9 @@ package com.nikitarizh.model;
 
 import java.sql.*;
 
+/**
+ * Represents devices table of database
+ */
 public class DevicesModel extends Model {
     
     /**

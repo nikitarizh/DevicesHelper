@@ -2,6 +2,9 @@ package com.nikitarizh.entities;
 
 import javafx.beans.property.*;
 
+/**
+ * Represents Device entity
+ */
 public class Device {
     private SimpleIntegerProperty id;
     private SimpleStringProperty type;

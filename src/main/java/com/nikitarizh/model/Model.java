@@ -2,6 +2,9 @@ package com.nikitarizh.model;
 
 import java.sql.*;
 
+/**
+ * Represents any table in database
+ */
 public abstract class Model {
 	protected Connection conn;
 	protected PreparedStatement stmt;
