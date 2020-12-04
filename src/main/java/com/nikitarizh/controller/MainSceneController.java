@@ -201,9 +201,7 @@ public class MainSceneController {
 
     @FXML
     public void storageTabSelected() {
-        if (storageSearchTextField != null && storageSearchTextField.textProperty() != null) {
             loadData(storageSearchTextField.textProperty().get(), "storage");
-        }
     }
 
     // *****************
@@ -222,9 +220,7 @@ public class MainSceneController {
 
     @FXML
     public void operatingDevicesTabSelected() {
-        if (operatingSearchTextField != null && operatingSearchTextField.textProperty() != null) {
-            loadData(operatingSearchTextField.textProperty().get(), "operating");
-        }
+        loadData(operatingSearchTextField.textProperty().get(), "operating");
     }
 
     /**
@@ -285,10 +281,8 @@ public class MainSceneController {
                 }
                 
             }
-            console.logWarning("data length: " + data.size());
             if (tab.equals("operating")) {
                 operatingDevicesTable.setItems(data);
-                console.logWarning("pushed length: " + data.size());
             }
             else {
                 storageDevicesTable.setItems(data);
