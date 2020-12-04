@@ -50,7 +50,6 @@ public class MainSceneController {
     @FXML
     public void initialize() {
         console = new Console(consoleField);
-
         try {
             console.logWarning("Connecting DB...");
             devicesModel = new DevicesModel();
@@ -201,7 +200,7 @@ public class MainSceneController {
 
     @FXML
     public void storageTabSelected() {
-            loadData(storageSearchTextField.textProperty().get(), "storage");
+        loadData(storageSearchTextField.textProperty().get(), "storage");
     }
 
     // *****************
@@ -220,7 +219,10 @@ public class MainSceneController {
 
     @FXML
     public void operatingDevicesTabSelected() {
-        loadData(operatingSearchTextField.textProperty().get(), "operating");
+        // this event is fired before the initialize() method so the console is null at first
+        if (console != null) {
+            loadData(operatingSearchTextField.textProperty().get(), "operating");
+        }
     }
 
     /**
@@ -253,7 +255,6 @@ public class MainSceneController {
                 if (status == null || status.isEmpty()) {
                     status = "OK";
                 }
-
                 if (search != null && !search.isEmpty()) {
                     search = search.trim().toLowerCase();
                     String fullData = "";
