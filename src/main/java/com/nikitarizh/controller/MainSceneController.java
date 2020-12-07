@@ -113,7 +113,7 @@ public class MainSceneController {
 
         try {
             console.logWarning("Trying to add blank value...");
-            devicesModel.addData("type", "location", "OK", "");
+            devicesModel.addData("type", "storage", "OK", "");
             loadData(null, "storage");
             console.logSuccess("Blank value has been added");
         }
