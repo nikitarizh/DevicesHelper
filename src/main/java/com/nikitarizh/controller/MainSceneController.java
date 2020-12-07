@@ -230,6 +230,7 @@ public class MainSceneController {
      * <p>
      * Performs search if search param is not null and not empty
      * @param search
+     * @param tab
      */
     public void loadData(String search, String tab) {
         ResultSet res = null;
