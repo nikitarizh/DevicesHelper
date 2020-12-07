@@ -236,7 +236,12 @@ public class MainSceneController {
         ResultSet res = null;
         try {
             console.logWarning("Trying to read DB...");
-            res = devicesModel.loadAllData();
+            if (tab.equals("operating")) {
+                res = devicesModel.loadOperatingData();
+            }
+            else {
+                res = devicesModel.loadStorageData();
+            }
             console.logSuccess("Data read");
         }
         catch (Exception e) {
@@ -259,7 +264,7 @@ public class MainSceneController {
                 if (search != null && !search.isEmpty()) {
                     search = search.trim().toLowerCase();
                     String fullData = "";
-                    if (tab == "operating") {
+                    if (tab.equals("operating")) {
                         fullData = type + " " + location + " " + status;
                     }
                     else {

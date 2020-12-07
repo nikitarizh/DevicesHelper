@@ -21,13 +21,41 @@ public class DevicesModel extends Model {
         stmt = conn.prepareStatement("CREATE TABLE if not exists 'devices' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' TEXT NOT NULL, 'location' TEXT NOT NULL, 'status' TEXT, 'serial' TEXT);");
         stmt.execute();
     }
-	
+    
 	public ResultSet loadAllData() throws ClassNotFoundException, SQLException {
         stmt = conn.prepareStatement("SELECT * FROM devices");
         stmt.execute();
         resSet = stmt.getResultSet();
 		
 		return resSet;
+    }
+
+    /**
+     * Loads data about devices in storage
+     * @return the current result as a ResultSet object or null if the result is an update count or there are no more results
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public ResultSet loadStorageData() throws ClassNotFoundException, SQLException {
+        stmt = conn.prepareStatement("SELECT * FROM devices WHERE location = 'storage'");
+        stmt.execute();
+        resSet = stmt.getResultSet();
+        
+        return resSet;
+    }
+
+    /**
+     * Loads data about operating devices
+     * @return the current result as a ResultSet object or null if the result is an update count or there are no more results
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public ResultSet loadOperatingData() throws ClassNotFoundException, SQLException {
+        stmt = conn.prepareStatement("SELECT * FROM devices WHERE location != 'storage'");
+        stmt.execute();
+        resSet = stmt.getResultSet();
+
+        return resSet;
     }
 
     /**
