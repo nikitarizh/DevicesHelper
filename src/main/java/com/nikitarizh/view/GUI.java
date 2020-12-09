@@ -32,6 +32,7 @@ public class GUI extends Application {
         }
     
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/css/main.css").toExternalForm());
     
         stage.setTitle("Devices Helper");
         stage.setScene(scene);

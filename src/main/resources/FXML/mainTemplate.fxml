@@ -31,7 +31,10 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <TextField fx:id="operatingSearchTextField" layoutX="14.0" layoutY="14.0" onTextChange="#operatingSearchInputKeyPressed" promptText="Search" />
+                        <TextField fx:id="operatingSearchTextField" layoutX="14.0" layoutY="14.0" onTextChange="#operatingSearchInputKeyPressed" promptText="Search">
+                           <font>
+                              <Font name="Trebuchet MS" size="13.0" />
+                           </font></TextField>
                      </children>
                   </AnchorPane>
               </content>
@@ -50,11 +53,26 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Button layoutX="78.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadDataButtonClicked" text="Load data" />
-                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
-                        <Button layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onAction="#removeButtonClicked" text="Remove" />
-                        <TextField fx:id="storageSearchTextField" layoutX="177.0" layoutY="14.0" onTextChange="#storageSearchInputKeyPressed" promptText="Search" />
-                        <Button layoutX="361.0" layoutY="14.0" mnemonicParsing="false" onAction="#openDeviceWindowKeyPressed" text="Open Device window" />
+                        <Button layoutX="78.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadDataButtonClicked" text="Load data">
+                           <font>
+                              <Font name="Courier New" size="13.0" />
+                           </font></Button>
+                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#addButtonClicked" text="Add">
+                           <font>
+                              <Font name="Courier New" size="13.0" />
+                           </font></Button>
+                        <Button layoutX="521.0" layoutY="14.0" mnemonicParsing="false" onAction="#removeButtonClicked" text="Remove">
+                           <font>
+                              <Font name="Courier New" size="13.0" />
+                           </font></Button>
+                        <TextField fx:id="storageSearchTextField" layoutX="177.0" layoutY="14.0" onTextChange="#storageSearchInputKeyPressed" promptText="Search">
+                           <font>
+                              <Font name="Trebuchet MS" size="13.0" />
+                           </font></TextField>
+                        <Button layoutX="350.0" layoutY="15.0" mnemonicParsing="false" onAction="#openDeviceWindowKeyPressed" text="Open Device window">
+                           <font>
+                              <Font name="Courier New" size="13.0" />
+                           </font></Button>
                      </children>
                   </AnchorPane>
                </content>
@@ -63,14 +81,14 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane layoutX="425.0" prefHeight="367.0" prefWidth="168.0">
+                        <Pane prefHeight="367.0" prefWidth="600.0">
                            <children>
-                              <TextFlow fx:id="consoleField" layoutX="-417.0" layoutY="27.0" prefHeight="334.0" prefWidth="578.0" style="-fx-background-color: #fff; -fx-border-width: 1px; -fx-border-color: #7f7f7f; -fx-border-radius: 2px;" />
+                              <TextFlow fx:id="consoleField" layoutX="7.0" layoutY="26.0" prefHeight="334.0" prefWidth="588.0" style="-fx-background-color: #fff; -fx-border-width: 1px; -fx-border-color: #7f7f7f; -fx-border-radius: 2px;" />
                            </children>
                         </Pane>
                         <Text layoutX="13.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Console" wrappingWidth="573.9287109375">
                            <font>
-                              <Font name="Arial" size="13.0" />
+                              <Font name="Courier New" size="13.0" />
                            </font>
                         </Text>
                      </children></AnchorPane>

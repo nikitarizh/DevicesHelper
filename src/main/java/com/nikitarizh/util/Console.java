@@ -1,5 +1,7 @@
 package com.nikitarizh.util;
 
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -64,6 +66,7 @@ public class Console {
      * @param t (Text instance)
      */
     private void pushText(Text t) {
+        t.setFont(Font.font("Courier New", FontWeight.NORMAL, 13));
         if (console.getChildren().size() >= maxLength) {
             console.getChildren().remove(0);
         }
