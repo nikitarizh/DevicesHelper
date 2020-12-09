@@ -11,13 +11,15 @@ public class Device {
     private SimpleStringProperty location;
     private SimpleStringProperty status;
     private SimpleStringProperty serial;
+    private SimpleIntegerProperty parent;
 
-    public Device(int id, String type, String location, String status, String serial) {
+    public Device(int id, String type, String location, String status, String serial, int parent) {
         this.id = new SimpleIntegerProperty(id);
         this.type = new SimpleStringProperty(type);
         this.location = new SimpleStringProperty(location);
         this.status = new SimpleStringProperty(status);
         this.serial = new SimpleStringProperty(serial);
+        this.parent = new SimpleIntegerProperty(parent);
     }
 
     public int getId() {
@@ -78,5 +80,17 @@ public class Device {
 
     public StringProperty serialProperty() {
         return serial;
+    }
+
+    public int getParent() {
+        return parent.get();
+    }
+
+    public void setParent(int parent) {
+        this.parent.set(parent);
+    }
+
+    public IntegerProperty parentProperty() {
+        return parent;
     }
 }

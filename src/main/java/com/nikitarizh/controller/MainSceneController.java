@@ -280,11 +280,11 @@ public class MainSceneController {
                     }
                     
                     if (ok) {
-                        data.add(new Device(id, type, location, status, serial));
+                        data.add(new Device(id, type, location, status, serial, -1));
                     }
                 }
                 else {
-                    data.add(new Device(id, type, location, status, serial));
+                    data.add(new Device(id, type, location, status, serial, -1));
                 }
                 
             }

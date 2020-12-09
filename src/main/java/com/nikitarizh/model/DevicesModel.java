@@ -18,7 +18,7 @@ public class DevicesModel extends Model {
     }
 
     public void createTable() throws ClassNotFoundException, SQLException {
-        stmt = conn.prepareStatement("CREATE TABLE if not exists 'devices' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' TEXT NOT NULL, 'location' TEXT NOT NULL, 'status' TEXT, 'serial' TEXT);");
+        stmt = conn.prepareStatement("CREATE TABLE if not exists 'devices' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' TEXT NOT NULL, 'location' TEXT NOT NULL, 'status' TEXT, 'serial' TEXT, 'parent' INTEGER DEFAULT -1);");
         stmt.execute();
     }
     
@@ -40,7 +40,7 @@ public class DevicesModel extends Model {
         stmt = conn.prepareStatement("SELECT * FROM devices WHERE location = 'storage'");
         stmt.execute();
         resSet = stmt.getResultSet();
-        
+
         return resSet;
     }
 
