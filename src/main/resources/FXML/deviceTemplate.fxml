@@ -9,34 +9,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nikitarizh.controller.DeviceSceneController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nikitarizh.controller.DeviceSceneController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="364.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="364.0">
          <children>
             <ImageView fx:id="deviceThumbnail" fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" smooth="false" />
             <Pane layoutX="115.0" layoutY="14.0" prefHeight="119.0" prefWidth="240.0">
                <children>
                   <Label layoutX="14.0" layoutY="16.0" text="Type" />
-                  <Line endX="-66.6185302734375" layoutX="110.0" layoutY="42.0" startX="-96.5" />
+                  <Line endX="-66.6185302734375" layoutX="110.0" layoutY="42.0" startX="-96.5" stroke="#3927ff" />
                   <Label layoutX="14.0" layoutY="50.0" text="Location" />
-                  <Line endX="-60.7668571472168" endY="1.52587890625E-5" layoutX="104.0" layoutY="75.0" startX="-90.5" />
-                  <Line endX="-68.363525390625" endY="0.067535400390625" layoutX="112.0" layoutY="109.0" startX="-98.5" startY="0.067535400390625" />
+                  <Line endX="-60.7668571472168" endY="1.52587890625E-5" layoutX="104.0" layoutY="75.0" startX="-90.5" stroke="#3927ff" />
                   <Label layoutX="12.0" layoutY="86.0" text="Serial" />
                   <TextField fx:id="typeField" layoutX="95.0" layoutY="11.0" onTextChange="#typeFieldChanged" prefHeight="27.0" prefWidth="141.0" style="-fx-background-color: #fff; -fx-background-radius: 2px;" />
                   <TextField fx:id="locationField" layoutX="95.0" layoutY="46.0" onTextChange="#locationFieldChanged" prefHeight="27.0" prefWidth="141.0" style="-fx-background-color: #fff; -fx-background-radius: 2px;" />
                   <TextField fx:id="serialField" layoutX="94.0" layoutY="81.0" onTextChange="#serialFieldChanged" prefHeight="27.0" prefWidth="142.0" style="-fx-background-color: #fff; -fx-background-radius: 2px;" />
                </children>
             </Pane>
-            <Pane layoutY="133.0" prefHeight="200.0" prefWidth="363.0">
+            <Pane layoutY="217.0" prefHeight="193.0" prefWidth="363.0">
                <children>
-                  <Label layoutX="17.0" layoutY="88.0" text="Status" />
+                  <Label layoutX="14.0" layoutY="84.0" text="Status" />
                   <ScrollPane layoutX="70.0" layoutY="-2.0" style="-fx-border-width: 0; -fx-background-color: #fff; -fx-background-radius: 2;">
                      <content>
-                        <TextArea fx:id="statusField" onTextChange="#statusFieldChanged" prefHeight="196.0" prefWidth="280.0" style="-fx-background-color: #fff; -fx-background-radius: 2px;" />
+                        <TextArea fx:id="statusField" onTextChange="#statusFieldChanged" prefHeight="186.0" prefWidth="280.0" style="-fx-background-color: #fff; -fx-background-radius: 2px;" />
                      </content>
                   </ScrollPane>
                </children>
             </Pane>
+            <Line endX="353.0" layoutY="133.0" startX="10.0" stroke="#3927ff" />
+            <Line endX="353.0" layoutY="206.0" startX="10.0" stroke="#3927ff" />
          </children>
       </Pane>
    </children>
