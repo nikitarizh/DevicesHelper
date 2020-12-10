@@ -67,15 +67,35 @@ public class DeviceSceneController {
             deviceThumbnail.setImage(image);
         }
         catch (Exception e) {
-            System.out.println("Device thumb loading error: " + e.getMessage());
-            System.out.println("Trying to load default thumbnail...");
             try {
-                Image image = new Image(DeviceSceneController.class.getResource("/img/default.png").toString());
+                System.out.println("Trying to load localized thumbnail...");
+                String fileName = "";
+                if (device.getType().toLowerCase().equals("клавиатура")) {
+                    fileName = "/img/keyboard.png";
+                }
+                else if (device.getType().toLowerCase().equals("мышь")) {
+                    fileName = "/img/mouse.png";
+                }
+                else if (device.getType().toLowerCase().equals("компьютер")) {
+                    fileName = "/img/pc.png";
+                }
+                else if (device.getType().toLowerCase().equals("ноутбук")) {
+                    fileName = "/img/laptop.png";
+                }
+                Image image = new Image(DeviceSceneController.class.getResource(fileName).toString());
                 deviceThumbnail.setImage(image);
-                System.out.println("Default thumbnail loaded");
             }
             catch (Exception e1) {
-                System.out.println("Error loading default thumbnail: " + e1.getMessage());
+                System.out.println("Device thumb loading error: " + e.getMessage());
+                System.out.println("Trying to load default thumbnail...");
+                try {
+                    Image image = new Image(DeviceSceneController.class.getResource("/img/default.png").toString());
+                    deviceThumbnail.setImage(image);
+                    System.out.println("Default thumbnail loaded");
+                }
+                catch (Exception e2) {
+                    System.out.println("Error loading default thumbnail: " + e1.getMessage());
+                }
             }
         }
     }
