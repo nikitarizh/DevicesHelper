@@ -307,6 +307,7 @@ public class MainSceneController {
      * Shows confirmation window (for cases when it's neccessary to reset the search text field)
      * <p>
      * If user agreed with search field reset, resets it
+     * @param tab
      * @return returns TRUE if user agreed with search field reset, FALSE otherwise
      */
     public boolean cleanSearchConfirmation(String tab) {
